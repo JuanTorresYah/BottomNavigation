@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
+        layoutParams.setBehavior(new BottomNavigationBehavior());
+
 
          toolbar = getSupportActionBar();
       //Carga el fragmento tienda por defecto
@@ -35,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
          loadFragment(new StoreFragment());
     }
 
-    private BottomNavigationView.OnNavigationItemReselectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemReselectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
         //Permite que el titulo de la barra de navegacion cambie dependiendo de el elemento seleccionado
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
